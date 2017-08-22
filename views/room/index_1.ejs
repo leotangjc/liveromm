@@ -576,9 +576,11 @@
 
     //AJAX 验证用户名
     $("#Name1").blur(function () {
+      //将输入的用户名变成一个变量
         var parmets = {
             name: $("#Name1").val()
         }
+        //然后用这个变量到服务器里去找有没有相同的值
         $.ajax({
             url: 'docheckregister',
             type: 'POST',
@@ -644,9 +646,11 @@
             })
 
 
+    //这里做了什么
     function getChat(){
         var obj_lis = document.getElementById("User_List").getElementsByTagName("li");
 
+        //搜索到每个用户
         for(var i=0;i < obj_lis.length;i++){
 
             obj_lis[i].onclick = function(){

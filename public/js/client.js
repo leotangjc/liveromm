@@ -176,15 +176,16 @@
             $("#userlist").mCustomScrollbar("scrollTo", "last");
             //添加系统消息
             var html = '';
-            html += '<li class="chatli"><span class="b">'
-            html += o.user.nick_name;
-            html += (action == 'login') ? ' 加入了聊天室' : ' 退出了聊天室';
-            html += '</span></li>';
-            var li = d.createElement('li');
-            var a = this.genUid();
-            li.className = 'system J-mjrlinkWrap J-cutMsg';
-            // $(li).html(html);
-            // this.msgObj.appendChild(li);
+              html += '<li class="chatli"><span class="b">'
+              html += o.user.nick_name;
+              html += (action == 'login') ? ' 加入了聊天室' : ' 退出了聊天室';
+              html += '</span></li>';
+              var li = d.createElement('li');
+              var a = this.genUid();
+              li.className = 'system J-mjrlinkWrap J-cutMsg';
+              console.log(html)
+              $(li).html(html);
+            this.msgObj.appendChild(li);
         },
         //第一个界面用户提交用户名
         usernameSubmit: function () {

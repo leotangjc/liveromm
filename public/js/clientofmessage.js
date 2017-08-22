@@ -27,7 +27,7 @@
         },
 
         messsgesubmit1: function () {
-            this.socket = io.connect('ws://139.196.203.21:3000');
+            this.socket = io.connect('ws://127.0.0.1:3000');
             var obj = {
                 date: $(this).parent().children('span').eq(0).text(),
                 content: $(this).parent().children('span').eq(1).html(),
@@ -44,7 +44,7 @@
             return false;
         },
         messsgecancel: function () {
-            this.socket = io.connect('ws://139.196.203.21:3000');
+            this.socket = io.connect('ws://127.0.0.1:3000');
 
             //level 78 代表删除
             var obj = {
@@ -74,7 +74,7 @@
              实际项目中，如果是需要用户登录，那么直接采用用户的uid来做标识就可以
              */
             //连接websocket后端服务器
-            this.socket = io.connect('ws://139.196.203.21:3000');
+            this.socket = io.connect('ws://127.0.0.1:3000');
 
 
             //监听消息发送

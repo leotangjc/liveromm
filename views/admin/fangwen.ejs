@@ -1,0 +1,58 @@
+<% layout('admin/master.ejs') %>
+
+<h1>访问记录</h1>
+
+<div class="box-body">
+    <table id="fangwenjilu" class="table table-bordered ">
+        <thead>
+        <tr>
+            <th>用户昵称</th>
+            <th>访问日期</th>
+            <th>用户等级</th>
+            <th>登录平台</th>
+        </tr>
+        </thead>
+        <tbody>
+        </tbody>
+        <tfoot>
+        </tfoot>
+    </table>
+</div>
+<script src="../plugins/datatables/jquery.dataTables.min.js"></script>
+<link rel="stylesheet" href="../plugins/datatables/jquery.dataTables.css">
+<script>
+  $('#fangwenjilu').DataTable({
+    'ajax': 'qtfwjl',//获取数据的url
+    'bFilter': true,                       //不使用过滤功能
+    'bLengthChange': false,                 //用户不可改变每页显示数量
+    'iDisplayLength': 9,                    //每页显示8条数据
+    'oLanguage': {                          //汉化
+      'sLengthMenu': '每页显示 _MENU_ 条记录',
+      'sZeroRecords': '没有检索到数据',
+      'sInfo': '当前数据为从第 _START_ 到第 _END_ 条数据；总共有 _TOTAL_ 条记录',
+      'sInfoEmtpy': '没有数据',
+      'sProcessing': '正在加载数据...',
+      'oPaginate': {
+        'sFirst': '首页',
+        'sPrevious': '前页',
+        'sNext': '后页',
+        'sLast': '尾页',
+      },
+    },
+    'columns': [
+      {'data': 'nick_name'},
+      {'data': 'fwrq'},
+      {'data': 'levelname'},
+      {'data': 'pingtai'},
+    ],
+    'columnDefs': [
+      {
+        'targets': [1],
+        'data': 'fwrq',
+        'render': function(data, type, full) {
+          return new Date(data).toLocaleString();
+        },
+      }],
+  });
+
+</script>

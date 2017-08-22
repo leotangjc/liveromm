@@ -38,7 +38,7 @@
              实际项目中，如果是需要用户登录，那么直接采用用户的uid来做标识就可以
              */
             //连接websocket后端服务器
-            this.socket = io.connect('ws://139.196.203.21:3000');
+            this.socket = io.connect('ws://127.0.0.1:3000');
             //监听消息发送
 
 

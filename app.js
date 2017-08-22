@@ -1,17 +1,28 @@
 var express = require('express');
+//用于处理路径
 var path = require('path');
+//请求网页的logo
 var favicon = require('serve-favicon');
+//在控制台中，显示req请求的信息
 var logger = require('morgan');
+//cookieParser中间件用于获取web浏览器发送的cookie中的内容
 var cookieParser = require('cookie-parser');
+//用于解析客户端请求的body中的内容,内部使用JSON编码处理,url编码处理以及对于文件的上传处理。
 var bodyParser = require('body-parser');
+
+//引入路由
 var routes = require('./routes/index');
 var users = require('./routes/users');
 var admin = require('./routes/admin');
+
+//引入express
 var app = express();
+
+//引入db、http及socket服务
 var db = require('./model/index');
 var http = require('http').Server(express);
 var io = require('socket.io')(http);
-// view engine setup
+// 设置视图引擎
 app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'ejs');
 app.engine('ejs', require('ejs-mate'));
@@ -21,8 +32,9 @@ app.use(logger('dev'));
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({extended: false}));
 app.use(cookieParser());
+//找到静态文件的绝对路径
 app.use(express.static(path.join(__dirname, 'public')));
-
+// 设置路由前缀
 app.use('/', users);
 app.use('/users', users);
 app.use('/admin', admin);
@@ -118,6 +130,7 @@ socket.on('delmessage', function (obj) {
 
     //删除消息 type置2
     console.log("delete");
+    //对服务器端数据进行更新
     db.messages.update({'msgid': obj}, {
         $set: {
             type: 2
@@ -125,11 +138,13 @@ socket.on('delmessage', function (obj) {
     }, function (err) {
     });
 
+    //返回已经删除的消息
     io.emit('delmessage', obj);
     console.log(obj);
 });
 
 //发布审核
+  //接收这个广播，并拿到里面的对象数据
 socket.on('checkmessage', function (obj) {
     var robot = new db.messages(obj);
     robot.save(function (err) {
@@ -137,6 +152,7 @@ socket.on('checkmessage', function (obj) {
             console.log('meow');
     });
 
+    //如果对象里的'level'值为66，就在服务器中更新一个数据
     if (obj.level == "66") {
         console.log("pass");
         db.messages.update({'msgid': obj.msgid}, {
@@ -209,10 +225,9 @@ socket.on('message', function (obj) {
 })
 ;
 
-http.listen(3000, function () {
-    console.log('listening on *:3001');
-});
+//http服务器指定的端口
 // catch 404 and forward to error handler
+//设置链接发生错误后，返回的错误码
 app.use(function (req, res, next) {
     var err = new Error('Not Found');
     err.status = 404;
