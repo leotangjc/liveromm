@@ -9,6 +9,7 @@ var logger = require('morgan');
 var cookieParser = require('cookie-parser');
 //用于解析客户端请求的body中的内容,内部使用JSON编码处理,url编码处理以及对于文件的上传处理。
 var bodyParser = require('body-parser');
+var swagger = require('./routes/swagger');
 
 //引入路由
 var routes = require('./routes/index');
@@ -38,6 +39,7 @@ app.use(express.static(path.join(__dirname, 'public')));
 app.use('/', users);
 app.use('/users', users);
 app.use('/admin', admin);
+app.use('/swagger', swagger);
 //在线用户
 global.onlineUsers = {};
 //当前在线人数
@@ -118,7 +120,7 @@ io.on('connection', function (socket) {
                 sendToName:result[0].sendToName,
                 username:result[0].username,
                 userid:result[0].userid
-            }
+            };
             io.emit('message', pass);
             console.log(pass);
     })

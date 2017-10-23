@@ -9,7 +9,7 @@
 
 ## Installation
 ```bash
-npm install https://github.com/SensitiveMix/live-chat-room
+npm install https://github.com/leotangjc/liveromm.git
 ```
 
 
@@ -30,7 +30,7 @@ npm install https://github.com/SensitiveMix/live-chat-room
 
 MIT License
 
-Copyright (c) 2016 Jack Sun
+Copyright (c) 2016
 
 Permission is hereby granted, free of charge, to any person obtaining a copy
 of this software and associated documentation files (the "Software"), to deal
